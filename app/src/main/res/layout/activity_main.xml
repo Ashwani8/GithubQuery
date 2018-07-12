@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:hint="enter a query and then click for search" />
+        android:hint="Enter a query and then click for search" />
 
     <TextView
         android:id="@+id/tv_url_display"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="22sp"
-        android:text="search URL will display here"/>
+        android:text="Click search and your URL will show up here!"/>
 
 
     <ScrollView
