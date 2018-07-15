@@ -15,6 +15,7 @@
  */
 package com.example.android.datafrominternet;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         // complete 2.4. (2) Call getResponseFromHttpUrl and display the results in mSearchResultsTextView
         // complete 2.4.(3) Surround the call to getResponseFromHttpUrl with a try / catch
         // block to catch an IOException
+       /* No need for this sync call, use AsyncTask instead
         String githubSearchResults = null;
         try{
             githubSearchResults = NetworkUtils.getResponseFromHttpUrl(githubSearchUrl);
@@ -89,9 +91,38 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e){
             e.printStackTrace();
         }
-
-
+        */
+        // completed 2.5.(4) Create a new GithubQueryTask and call its execute method, passing in the url to query
+        new GithubQueryTask().execute(githubSearchUrl);
     }
+    //completed 2.5.(1) Create a class called GithubQueryTask that extends AsyncTask<URL, Void, String>
+    public class GithubQueryTask extends AsyncTask<URL, Void, String>{
+        // completed 2.5.(2) Override the doInBackground method to perform the query. Return the results.
+        // (Hint: You've already written the code to perform the query)
+        @Override
+        protected String doInBackground(URL... urls) {
+            URL searchUrl = urls[0];
+            String githubSearchResults = null;
+            try{
+                githubSearchResults = NetworkUtils.getResponseFromHttpUrl(searchUrl);
+
+            }catch (IOException e){
+                e.printStackTrace();
+
+            }
+            return githubSearchResults;
+        }
+        // completed 2.5.(3) Override onPostExecute to display the results in the TextView
+        @Override
+        protected void onPostExecute(String githubSearchResults) {
+            if(githubSearchResults != null && !githubSearchResults.equals("")){
+                mSearchResultsTextView.setText(githubSearchResults);
+            }
+        }
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
