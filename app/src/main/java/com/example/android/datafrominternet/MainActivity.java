@@ -23,6 +23,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.datafrominternet.utilities.NetworkUtils;
+
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -60,6 +64,20 @@ public class MainActivity extends AppCompatActivity {
     // completed  (8) Override onCreateOptionsMenu
     // completed(9) Within onCreateOptionsMenu, use getMenuInflater().inflate to inflate the menu
     // completed(10) Return true to display your menu
+
+    // complete 2.3.2 and .3  Create a method called makeGithubSearchQuery. Complete 2.3.3 with in
+    // this method,build URL from the EditText and set the build URL to the TextView
+
+    /**
+     * this method retrives the serach text from the EditText, constructs the url (using
+     * {@link NetwoekUtill} ) for the github repository
+     */
+    private void makeGithubSearchQuery(){
+                String githubQuery = mSearchBoxEditText.toString();
+        URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
+        mUrlDisplayTextView.setText(githubSearchUrl.toString());
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -78,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuItemThatWasSelected = item.getItemId();
         if (menuItemThatWasSelected == R.id.action_search){
-
+            Toast.makeText(this, "search clicked", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "search clicked", Toast.LENGTH_SHORT).show();
+
         return super.onOptionsItemSelected(item);
     }
 }
