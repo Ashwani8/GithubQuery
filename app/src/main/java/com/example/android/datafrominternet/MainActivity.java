@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.android.datafrominternet.utilities.NetworkUtils;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
@@ -69,13 +70,26 @@ public class MainActivity extends AppCompatActivity {
     // this method,build URL from the EditText and set the build URL to the TextView
 
     /**
-     * this method retrives the serach text from the EditText, constructs the url (using
-     * {@link NetwoekUtill} ) for the github repository
+     * this method retrieves the search text from the EditText, constructs the url (using
+     * {@link NetworkUtils} ) for the github repository you would like to find, displays that URL in
+     * a TextView.
      */
     private void makeGithubSearchQuery(){
                 String githubQuery = mSearchBoxEditText.toString();
         URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
         mUrlDisplayTextView.setText(githubSearchUrl.toString());
+
+        // complete 2.4. (2) Call getResponseFromHttpUrl and display the results in mSearchResultsTextView
+        // complete 2.4.(3) Surround the call to getResponseFromHttpUrl with a try / catch
+        // block to catch an IOException
+        String githubSearchResults = null;
+        try{
+            githubSearchResults = NetworkUtils.getResponseFromHttpUrl(githubSearchUrl);
+            mSearchResultsTextView.setText(githubSearchResults);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
 
     }
     @Override
@@ -96,7 +110,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuItemThatWasSelected = item.getItemId();
         if (menuItemThatWasSelected == R.id.action_search){
-            Toast.makeText(this, "search clicked", Toast.LENGTH_SHORT).show();
+            //Completed 2.3.4 remove Toast message when the search menue was clicked
+            // completed 2.3.5 call makeGithubSerachQuery when the search menu item is clicked
+
+            makeGithubSearchQuery();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
