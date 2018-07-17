@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
 
         //  Use findViewById to get a reference to mUrlDisplayTextView
-        mSearchResultsTextView = (TextView) findViewById(R.id.tv_url_display);
+        mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
         // Use findViewById to get a reference to mSearchResultsTextView
         mSearchResultsTextView = (TextView) findViewById(R.id.tv_github_search_result_json);
     }
